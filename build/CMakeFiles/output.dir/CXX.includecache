@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/functions.h
+stdio.h
+-
+errno.h
+-
+string.h
+-
+
+/root/c_workspace/cjlib/src/main.cpp
+iostream
+-
+string
+-
+functions.h
+/root/c_workspace/cjlib/src/functions.h
+

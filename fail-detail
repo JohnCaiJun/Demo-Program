@@ -1,0 +1,32 @@
+In file included from /root/c_workspace/cjlib/src/main.cpp:2:0:
+/root/c_workspace/cjlib/include/functions.h:16:39: 错误：‘string’未声明
+ int execute_cmd(const char* pCommand, string& strResult)
+                                        ^
+										/root/c_workspace/cjlib/include/functions.h: 在函数‘int execute_cmd(const char*, int&)’中:
+										/root/c_workspace/cjlib/include/functions.h:21:36: 错误：‘strerror’在此作用域中尚未声明
+										   prinf("Error:%s\n",strerror(errno));
+										                                       ^
+																			   /root/c_workspace/cjlib/include/functions.h:21:37: 错误：‘prinf’在此作用域中尚未声明
+																			      prinf("Error:%s\n",strerror(errno));
+																				                                       ^
+																													   /root/c_workspace/cjlib/include/functions.h:25:12: 错误：对成员‘clear’的请求出现在‘strResult’中，而后者具有非类类型‘int’
+																													     strResult.clear();
+																														             ^
+																																	 /root/c_workspace/cjlib/include/functions.h:30:28: 错误：‘memset’在此作用域中尚未声明
+																																	   memset(buff,0,sizeof(buff));
+																																	                               ^
+																																								   /root/c_workspace/cjlib/include/functions.h:33:13: 错误：对非左值数组的使用无效
+																																								      strResult += buff;
+																																									               ^
+																																												   /root/c_workspace/cjlib/include/functions.h:33:13: 错误：在求‘operator+=(int, char [1024])’值时
+																																												   /root/c_workspace/cjlib/src/main.cpp: 在函数‘int main()’中:
+																																												   /root/c_workspace/cjlib/src/main.cpp:11:30: 错误：用类型为‘const char*’的右值初始化类型为‘int&’的非常量引用无效
+																																												     cout << execute_cmd("ls","r")<<endl;
+																																													                               ^
+																																																				   In file included from /root/c_workspace/cjlib/src/main.cpp:2:0:
+																																																				   /root/c_workspace/cjlib/include/functions.h:16:5: 错误：在传递‘int execute_cmd(const char*, int&)’的第 2 个实参时
+																																																				    int execute_cmd(const char* pCommand, string& strResult)
+																																																					     ^
+																																																						 make[2]: *** [CMakeFiles/output.dir/src/main.cpp.o] 错误 1
+																																																						 make[1]: *** [CMakeFiles/output.dir/all] 错误 2
+																																																						 make: *** [all] 错误 2

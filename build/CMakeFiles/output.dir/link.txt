@@ -1,0 +1,1 @@
+/usr/bin/c++    -rdynamic CMakeFiles/output.dir/src/main.cpp.o  -o output  -L/root/c_workspace/cjlib 
