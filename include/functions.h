@@ -13,6 +13,10 @@
 #include <errno.h>
 #include <string.h>
 
+/*
+ * 执行linux命令的函数：
+ * 返回执行结果，并保存至strResult
+ * */
 int execute_cmd(const char* pCommand, std::string& strResult)
 {
 	FILE *pFstream=NULL;
@@ -36,5 +40,6 @@ int execute_cmd(const char* pCommand, std::string& strResult)
 	pclose(pFstream);
 	return 0;
 }
+
 
 #endif
