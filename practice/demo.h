@@ -13,6 +13,7 @@
 #include <string>
 #include <cctype>
 #include <cstddef>
+#include <cassert>
 #include "Sales_item.h"
 
 void demo1(){
@@ -117,6 +118,22 @@ void demo9() {
 	std::cout << "int b[10] " << sizeof(b[10]) << std::endl;
 }
 
+// debug -> assert
+void demo10() {
+	int i;
+	std::cout << "input a number (number<9):";
+	std::cin >> i;
+	#ifndef NDEBUG
+		std::cout << "i = " << i << std::endl;
+	std::cerr << "Error:\n\tfile:" << __FILE__ << std::endl
+	            << "\tfunction: " << __func__ << std::endl
+					<< "\tline: " << __LINE__ << std::endl
+						<< "\tcompiled on: " << __DATE__
+							<< " at " << __TIME__ << std::endl;
+	#endif
+}
+
+// 
 
 
 #endif
