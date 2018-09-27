@@ -10,9 +10,24 @@
 #define MAIN_CPP
 
 #include <iostream>
-#include "demo.h"
+//#include "demo.h"
+#include "TextQuery.h"
 
 using namespace std;
+
+void runQueries(ifstream &infile) {
+	TextQuery tq(infile);
+
+	while(true) {
+		cout << "Enter word to look for, or q to quit:";
+		string s;
+		s.clear();
+
+		if (!(cin >> s) || s = "q") break;
+
+		print(cout,tq.query(s)) << endl;
+	}
+}
 int main(){
 //	demo1();
 //	demo2();
@@ -24,8 +39,14 @@ int main(){
 //	demo8();
 //	demo8();
 //	demo9();
-	demo10();
+//	demo10();
+
+	string pwd = getPwd();
+	cout << "pwd = " << pwd << endl;
+	ifstream file("wordfile");
+
 	
+	runQueries(file);
 	return 0;
 }
 

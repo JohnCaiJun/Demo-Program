@@ -100,59 +100,36 @@ int execute_cmd(const char* pCommand, std::string& strResult)
 	pclose(pFstream);
 	return 0;
 }
-
-// enum枚举搭配switch做参数选择器
-enum OPT
-{	
-	HELP,
-	APP,
-	AUTOCONNECT,
-	DESKTOP,
-	FONTS,
-	MONITORS,
-	MULTIMON,
-	PORT,
-	SOUND,
-};
-	
-/*
-string optstr = "ab:c::"
-
-单个字符a         表示选项a没有参数            格式：-a即可，不加参数
-单字符加冒号b:     表示选项b有且必须加参数      格式：-b 100或-b100,但-b=100错
-单字符加2冒号c::   表示选项c可以有，也可以无     格式：-c200，其它格式错误
-*/
 // 处理命令行选项和参数
-void Tool::getOptLong(int argc, char* argv[], string opts){
-	int OPT;
+void getOptLong(int argc, char* argv[], string opts){
+	int opt;
 	int digit_optind = 0;
 	int option_index = 0;
 	char *string =(char*) opts.c_str();
 	static struct option long_options[] =
 	{  
-		{"help", no_argument,NULL, HELP},
-		{"app", required_argument,NULL, APP},
-		{"auto-reconnect", no_argument,NULL, AUTOCONNECT},
-		{"desktop", required_argument,NULL, DESKTOP},
-		{"fonts", required_argument,NULL, FONTS},
-		{"monitors", required_argument,NULL, MONITORS},
-		{"multimon", no_argument,NULL, MULTIMON},
-		{"port", optional_argument,NULL, PORT},
-		{"sound", required_argument,NULL, SOUND},
+		{"help", no_argument,NULL, 300},
+		{"app", required_argument,NULL, 301},
+		{"auto-reconnect", no_argument,NULL, 302},
+		{"desktop", required_argument,NULL, 303},
+		{"fonts", required_argument,NULL, 304},
+		{"monitors", required_argument,NULL, 305},
+		{"multimon", no_argument,NULL, 306},
+		{"port", optional_argument,NULL, 307},
+		{"sound", required_argument,NULL, 308},
 		{NULL,     0,                      NULL, 0},
 	}; 
 
-	while((OPT =getopt_long_only(argc,argv,string,long_options,&option_index))!= -1)
+	while((opt =getopt_long_only(argc,argv,string,long_options,&option_index))!= -1)
 	{  
-		#ifndef NDEBUG
-		printf("opt = %c\t\t", OPT);
+
+		printf("opt = %c\t\t", opt);
 		printf("optarg = %s\t\t",optarg);
 		printf("optind = %d\t\t",optind);
 		printf("argv[optind] =%s\t\t", argv[optind]);
 		printf("option_index = %d\n",option_index);
-		#endif
 		
-		switch(OPT){
+		switch(opt){
 			//处理短选项
 			case 'h':
 				displayHelp();
@@ -161,66 +138,59 @@ void Tool::getOptLong(int argc, char* argv[], string opts){
 				#endif
 				break;
 			case 'p':
-				m_tCmdArgs.passwd = optarg;		
+				comArgs.passwd = optarg;		
 				#ifndef NDEBUG
-				cout<< "\noption=p,m_tCmdArgs.passwd="<<m_tCmdArgs.passwd<<endl;
+				cout<< "\noption=p,comArgs.passwd="<<comArgs.passwd<<endl;
 				printf("option=p, optopt=%c, optarg=%s\n", optopt, optarg);
 				#endif
 				break;
 			case 'u':
-				m_tCmdArgs.user = optarg;
+				comArgs.user = optarg;
 				#ifndef NDEBUG
-				cout<<"\noption=u,m_tCmdArgs.user="<<m_tCmdArgs.user<<endl;
+				cout<<"\noption=u,comArgs.user="<<comArgs.user<<endl;
 				printf("option=u, optopt=%c, optarg=%s\n", optopt, optarg);
 				#endif
 				break;
 			case 'f':
-				m_tCmdArgs.resolution = "fullscreen";
+				comArgs.resolution = "fullscreen";
 				#ifndef NDEBUG
-				cout<<"\noption=u,m_tCmdArgs.user="<<m_tCmdArgs.user<<endl;
+				cout<<"\noption=u,comArgs.user="<<comArgs.user<<endl;
 				printf("option=u, optopt=%c, optarg=%s\n", optopt, optarg);
 				#endif
 				break;
 			case 'v':
-				m_tCmdArgs.host = optarg;
+				comArgs.host = optarg;
 				#ifndef NDEBUG
-				cout << "\noption=h,m_tCmdArgs.host="<<m_tCmdArgs.host<<endl;
+				cout << "\noption=h,comArgs.host="<<comArgs.host<<endl;
 				printf("option=s, optopt=%c, optarg=%s\n", optopt, optarg);
 				#endif
 				break;
 
 			// 处理长选项
-			case HELP:
+			case 300:
 				displayHelp();
 				break;
-			case APP:
-				m_tCmdArgs.appCommand = optarg;
+			case 301:
+				comArgs.appCommand = optarg;
 				#ifndef NDEBUG
 				printf("option=c, optopt=%c, optarg=%s\n", optopt, optarg);
 				#endif
 				break;
-			case DESKTOP:
-				m_tCmdArgs.appCommand = optarg;
+			case 303:
+				comArgs.appCommand = optarg;
 				#ifndef NDEBUG
 				printf("option=c, optopt=%c, optarg=%s\n", optopt, optarg);
 				#endif
 				break;
-			case MULTIMON:
-				m_tCmdArgs.resolution = "fullscreen";
-				m_tCmdArgs.xinerama = "yes";
+			case 306:
+				comArgs.resolution = "fullscreen";
+				comArgs.xinerama = "yes";
 				#ifndef NDEBUG
 				printf("option=c, optopt=%c, optarg=%s\n", optopt, optarg);
 				#endif
 				break;
-			case PORT:
-				m_tCmdArgs.port = optarg;		
-				#ifndef NDEBUG
-				printf("option=c, optopt=%c, optarg=%s\n", optopt, optarg);
-				#endif
-				break;
-			case MONITORS:
-				m_tCmdArgs.monitor.clear();
-				m_tCmdArgs.monitor = optarg;		
+			case 307:
+				comArgs.port = optarg;		
 				#ifndef NDEBUG
 				printf("option=c, optopt=%c, optarg=%s\n", optopt, optarg);
 				#endif
@@ -232,7 +202,7 @@ void Tool::getOptLong(int argc, char* argv[], string opts){
 				break;
 			default:
 				#ifndef NDEBUG
-				printf("default, result=%c\n",OPT);
+				printf("default, result=%c\n",opt);
 				cout << "\n没有此选项：" <<endl;
 				#endif
 				break;
@@ -242,16 +212,13 @@ void Tool::getOptLong(int argc, char* argv[], string opts){
 	
 	#ifndef NDEBUG
 	//看看最后的命令行参数，看顺序是否改变了哈。
-	for(OPT = 1; OPT < argc; OPT++)
-		printf("\nat the end-----argv[%d]=%s\n", OPT, argv[OPT]);
+	for(opt = 1; opt < argc; opt++)
+		printf("\nat the end-----argv[%d]=%s\n", opt, argv[opt]);
 	#endif
 
 }
-
-
-// 获取扩展屏幕分辨率
-string getScrennResolution()
-{
+string getScrennResolution(){
+	// 获取扩展屏幕分辨率
 	string str = "xrandr | awk \'{if($2 == \"connected\" && $3 != \"primary\") print $3}\'";
 	string result = "";
 	int i = execute_cmd(str.c_str(),result);
