@@ -16,20 +16,18 @@ move_window()
 	wmctrl -r $window_ip -b add,fullscreen
 }
 
-geometry_current=$(xdotool getdisplaygeometry | tr " " "x")
+geometry_current=$(xfreerdp /monitor-list | tr "+" " " | awk '{if($3=="0") print $2}')
 
 window_1=$(ps -ef | grep xfreerdp | grep -v grep | awk '{if($9=="/monitors:0") print $6}' | cut -d: -f2)
 window_2=$(ps -ef | grep xfreerdp | grep -v grep | awk '{if($9=="/monitors:1") print $6}' | cut -d: -f2)
 
-geometry_window_1=$(wmctrl -G -l | grep $window_1 | grep -v grep | awk '{print $5"x"$6}')
-geometry_window_2=$(wmctrl -G -l | grep $window_2 | grep -v grep | awk '{print $5"x"$6}')
+geometry_window_1=$(xfreerdp /monitor-list | tr "*[]" " " | awk '{if($1=="0") print $2}')
+geometry_window_2=$(xfreerdp /monitor-list | tr "*[]" " " | awk '{if($1=="1") print $2}')
 
-
-if [ "$geometry_current" == "$geometry_window_1" ]; then
+if [ "$geometry_current" != "$geometry_window_1" ]; then
 	move_window $window_1
 else
 	move_window $window_2
-
 fi
 
 /bin/bash /bin/panel_do.sh &
