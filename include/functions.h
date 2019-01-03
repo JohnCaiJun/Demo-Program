@@ -278,6 +278,27 @@ string getMainResolution(){
 	return result; 
 }
 
+// 读文件 （以空格为分割符,如a b,读取后转化为字符串）
+std::string readFile()
+{
+	ifstream infile;
+	infile.open("/some/path");
+	string a,b;
+	vector<string> vs;
+	while(infile >> a >> b){
+		vs.push_back(a);
+	}
+	string a1;
+	for(auto iter = vs.begin(); iter != vs.end(); ++iter){
+		if(iter!=vs.end()-1){
+			a1.append(*iter+",");
+		}else{
+			a1.append(*iter);
+		}
+	}
+	return a1;
+}
+
 // 调试显示错误信息 
 void errorInfor() {
 	std::cerr << "Error:\n\tfile:" << __FILE__ << std::endl
