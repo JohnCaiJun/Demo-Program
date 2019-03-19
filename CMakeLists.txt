@@ -20,8 +20,8 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 
 # 源文件
 set(SRC 
-		${PROJECT_SOURCE_DIR}/src/main.cpp		
-)
+		${PROJECT_SOURCE_DIR}/src/main.cpp
+		include/sortTool.h)
 
 # 生成可执行文件
 link_directories(${PROJECT_SOURCE_DIR})

@@ -13,6 +13,8 @@
 #include <errno.h>
 #include <string.h>
 
+using namespace std;
+
 
 // 獲取家用戶目錄
 string getHomeDir() {
