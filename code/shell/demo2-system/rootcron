@@ -1,0 +1,5 @@
+#每周3  3.10分 5.10分
+10 3,5 * * 3 /bin/echo `date "+\%F \%T"` >> ~/time
+
+#每分钟访问以下我的博客
+#* * * * * /bin/bash ~/mysh/echo_time.sh
