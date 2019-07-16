@@ -1,0 +1,23 @@
+[Unit]
+Description=john's demo
+
+[Service]
+Type=oneshot # 启动完成，没有进程
+ExecStart=/bin/bash /tmp/test.sh
+StandardOutput=syslog
+StandardError=inherit
+
+[Install]
+WantedBy=multi-user.target
+
+# =====脚本========
+# FileName:/tmp/test.sh
+# $!/bin/bash
+# date >> /tmp/date
+# =================
+
+#======位置==================
+# systemd进程的配置文件 
+# 1. 系统类 /etc/systemd/system/* 
+# 2. 第三方 /usr/lib/systemd/system/*
+#=============================
