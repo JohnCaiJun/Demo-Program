@@ -249,6 +249,6 @@ def get_ppa_info_from_lp(owner_name, ppa_name, base_codename):
 
 最后，明确一下，安装apt-mirror是前提，根据你自己的需求去修改源代码。
 
-[add-apt-getrepository 添加软件源模板 (ubuntu/centos都试用)]()
+[add-apt-getrepository 添加软件源模板 (ubuntu/centos都试用)](https://github.com/JohnCaiJun/Demo-Program/blob/master/code/python/add-apt-repository/add-apt-repository-1907271254.py)
 
 >版权声明：©2019 Jun 转载请保留原文链接及作者
