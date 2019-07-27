@@ -12,8 +12,17 @@
   <div id="app"></div>
   <script>
     window.$docsify = {
-      name: '',
-      repo: ''
+      maxAge: 100,
+      name: 'Demo-Program',
+      repo: 'https://github.com/johncaijun/Demo-Program',
+      search: {
+        path: 'auto',
+        placeholder: 'Type to search: ',
+        noData: ' No Results! ',
+        depth: 6
+      },
+      coverpage: true
+      //loadSidebar: true
     }
   </script>
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
